@@ -8,38 +8,44 @@
 </view>
 
 <!-- 贴子动态内容 -->
-<view class="posts">
-<scroll-view class="scroll-container">
-  <block wx:for="{{currentPosts}}" wx:key="index">
-    <view class="post">
-    <!-- 贴子头部 -->
-      <image src="/图片素材/莞工趣谈/首页/图标/帖子右上角.png" class="post-icon" />
-      <view class="post-header">
-        <image src="{{item.avatar}}" class="avatar" />
-        <view class="post-info">
-          <text class="username">{{item.username}}</text>
-          <view class="timestamp"><text >{{item.time}}</text></view>
-        </view>
-      </view>
-      <!-- 贴子内容 -->
-      <view class="post-content">
-        {{item.content}}
-      </view>
-      <!-- 贴子点击 -->
-      <view class="post-actions">
-      <view class="action">
-        <image src="{{item.avatarl}}" class="action-class" />
-      </view>
-      <view class="action">
-        <image src="/图片素材/莞工趣谈/首页/图标/点赞.png" class="action-icon" bindtap="handleLike" data-id="{{item.id}}"/>
-        <text>{{item.likes}}</text>
-        <image src="/图片素材/莞工趣谈/首页/图标/评论.png" class="action-icon" />
-        <text>{{item.comments}}</text>
-      </view>
+<scroll-view 
+  class="posts-scroll-view"
+  scroll-y
+  refresher-enabled="{{true}}"
+  refresher-triggered="{{refresherTriggered}}"
+  bindrefresherrefresh="onScrollRefresh"
+  enhanced="{{true}}"
+  bounces="{{true}}"
+  show-scrollbar="{{false}}"
+>
+  <block wx:if="{{loading}}">
+    <view class="loading-container">
+      <text>加载中...</text>
     </view>
-    
+  </block>
+  <block wx:else>
+    <view class="posts-container">
+      <block wx:for="{{currentPosts}}" wx:key="id" post-id="{{item.id}}" bind:like="onLike">
+        <components-post
+        post-id="{{item.id}}"
+            avatar="{{item.avatar}}"
+            avatarl="{{item.avatarl}}"
+            username="{{item.username}}"
+            time="{{item.time}}"
+            content="{{item.content}}"
+            title="{{item.title}}"     
+            data-postId="{{item.id}}"   
+            comments="{{item.comments}}"
+            likes="{{item.likes}}"
+            collects="{{item.collects}}"
+            is-liked="{{item.isLiked}}"
+            is-collected="{{item.isCollected}}"
+            bind:like="onLike"
+            bind:collect="onCollect"
+            catch:tap="onPostClick"
+        />
+      </block>
     </view>
   </block>
 </scroll-view>
-</view>
 </view>

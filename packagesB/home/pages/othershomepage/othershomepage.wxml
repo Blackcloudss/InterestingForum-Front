@@ -6,37 +6,51 @@
     <view class="header">
       <image class="touxiang" src="{{avatar}}"></image>
       <text class="title">{{name}}</text>
+      
       <image wx:if="{{sex === '女'}}" class="sex-icon" src="/图片素材/1-4我的/性别-女 1.png"></image>
       <image wx:if="{{sex === '男'}}" class="sex-icon" src="/图片素材/1-4我的/性别-男 1.png"></image>
+     
     </view>
     <view class="signature">
+      <text>个性签名：</text>
       <text>{{signature}}</text>
-      
-        <image class="write-icon" src="/图片素材/1-5我的主页/写 1.png"></image>
-      
-    </view>
-    <view class="info">
-      <image class="id-icon" src="/图片素材/1-5我的主页/学号 1.png"></image>
-      <text class="id">{{studentId}}</text>
-      <image class="college-icon" src="/图片素材/1-5我的主页/学院 1.png"></image>
-      <text class="college">{{college}}</text>
+      <image class="write-icon" src="/图片素材/1-5我的主页/写 1.png"></image>
     </view>
     
-    <view class="edit">
-      <image class="edit-icon" src="/图片素材/1-5我的主页/编辑 1.png"></image>
-      <button class="button2" bindtap="goToIdentityProfile">编辑资料</button>
+    <view class="birthday">
+      <text>生日:</text>
+      <text>{{birthday}}</text>
     </view>
+
+    <view class="stats">
+      <view class="stats1">
+        <text>{{followCount}} </text>
+        <view class="stats1-bottom">
+          <text class="stats-text1">关注 </text>
+          <image class="stats1-bottom-icon" src="/图片素材/1-4我的/我的关注 1.png"></image>
+        </view>
+      </view>
+
+      <view class="stats2">
+        <text>{{followerCount}}</text>
+        <view class="stats2-bottom">
+          <text class="stats-text2">粉丝</text>
+          <image class="stats2-bottom-icon" src="/图片素材/1-4我的/粉丝 1.png"></image>
+        </view>
+      </view>
+    </view>
+    
   </view> 
   <view class="third-part">
    <view class="third-part1">
       <view class="tabs">
         <button class="tab-button {{currentTab === 'posts' ? 'active' : ''}}" bindtap="showPosts">
         <image class="showPosts-icon" src="/图片素材/1-5我的主页/贴子.png"></image>
-        我的帖子
+        帖子
         </button>
         <button class="tab-button {{currentTab === 'favorites' ? 'active' : ''}}" bindtap="showFavorites">
           <image class="showFavorites-icon" src="/图片素材/1-5我的主页/收藏 1.png"></image>
-        我的收藏
+        收藏
         </button>
       </view>
       <scroll-view class="posts-scroll" scroll-y="true" style="height: 450px;">
@@ -60,7 +74,6 @@
         <block wx:if="{{currentTab === 'favorites'}}">
           <block wx:for="{{favorites}}" wx:key="id">
             <post 
-            
            post-id="{{item.id}}"
             avatar="{{item.avatar}}"
             username="{{item.username}}"

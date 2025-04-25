@@ -29,11 +29,11 @@
   color:white;
 }
 .box3{
-  height: 1130rpx;
+  height: 1081rpx;
   padding: 30rpx;
   width:590rpx;
   background-color: white;
-  margin-top: -90rpx;
+  margin-top: -110rpx;
   position: absolute;
   z-index: 10;
   border-radius: 50rpx;

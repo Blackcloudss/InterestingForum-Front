@@ -3,20 +3,11 @@
 }
 .navbar {
   display: flex;
-  width: 380px;
-  height: 50px;
+  width: 385px;
+  height: 35px;
   justify-content: space-around;
-  background-color: #84f8fc;
-  background-image: linear-gradient(
-    to right,
-    #84f8fc,
-    #b1fafd,
-    #d8fdfe,
-    #f9ffff
-  );
+  background-color: #e4ffe4;
   padding: 10px 0;
-  border:2px solid #d9d9d9 ;
-  border-radius: 20px;
   position: fixed;/*使用固定定位*/
   top: 0px; /*固定在视口底部*/
   /* 设置组件层级 */
@@ -29,12 +20,13 @@
   text-align: center;
   padding: 10px 0px;
   font-size: 15px;
+
   /* flex: 0 0 auto; */
 }
 
 .nav-item.active {
   font-weight: 700;
-  border-bottom: 2px solid #007aff; /* 选中标签的下划线 */
+  border-bottom: 2px solid #a5dfb2; /* 选中标签的下划线 */
 }
 
 .posts {
@@ -157,7 +149,12 @@
   padding: -31rpx;
 }
 
-
+.empty-tips {
+  text-align: center;
+  padding: 20px;
+  color: #888;
+  font-size: 14px;
+}
 
 
 

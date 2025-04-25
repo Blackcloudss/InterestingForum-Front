@@ -6,13 +6,13 @@
     <!-- 姓名 -->
     <view class="form-item">
       <label>姓名：</label>
-      <input name="realName" placeholder="请输入姓名" class="input" />
+      <input name="realName" value="{{realName}}" placeholder="请输入姓名" class="input" bindinput="onRealNameIdInput"/>
     </view>
     <view class="divider"></view>
     <!-- 学号 -->
     <view class="form-item">
       <label>学号：</label>
-      <input name="studentId" placeholder="请输入学号" class="input" />
+      <input name="studentId" value="{{studentId}}" placeholder="请输入学号" class="input" bindinput="onStudentIdInput" />
     </view>
     <view class="divider"></view>
     <!-- 院系 -->
@@ -20,10 +20,11 @@
       <label>院系：</label>
       <picker 
         name="department" 
+        value="{{department}}"
         range="{{departments}}" 
-        value="{{departmentIndex}}"
         bindchange="departmentChange"
         class="picker"
+        
       >
         <view class="picker-text">
           {{departments[departmentIndex] || '请选择院系'}}
@@ -34,7 +35,7 @@
     <!-- 专业 -->
     <view class="form-item">
       <label>专业：</label>
-      <input name="major" placeholder="请输入专业" class="input" />
+      <input name="major" value="{{major}}" placeholder="请输入专业" class="input" bindinput="onMajorIdInput"  />
     </view>
     <view class="divider"></view>
     <!-- 入学年份 -->
@@ -42,10 +43,11 @@
       <label>入学年份：</label>
       <picker 
         name="enrollmentYear" 
+        value="{{enrollmentYear}}"
         range="{{years}}" 
-        value="{{yearIndex}}" 
         bindchange="yearChange"
         class="picker"
+        
       >
         <view class="picker-text">
           {{years[yearIndex] || '请选择入学年份'}}
@@ -56,7 +58,7 @@
     <!-- 手机号码 -->
     <view class="form-item">
       <label>手机号码：</label>
-      <input name="phone" placeholder="请输入手机号码" class="input" />
+      <input name="phone" value="{{phone}}" placeholder="请输入手机号码" class="input"  bindinput="onPhoneInput" />
     </view>
     <view class="divider"></view>
         

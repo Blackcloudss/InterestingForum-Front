@@ -7,24 +7,30 @@
       <view class="item">
         <view class="item-label">头像</view>
         <view class="item-value">
-          <image src="{{avatarUrl}}" mode="aspectFill" bindtap="chooseAvatar"></image>
+          <button class="avatar-wrapper" open-type="chooseAvatar" bind:chooseavatar="onChooseAvatar">
+            <image class="avatar" src="{{userInfo.avatarUrl}}"></image>
+        </button>
         </view>
         <image class="jiantou" src="/进入符号.svg"></image>
       </view>
       <view class="divider"></view>
       <!-- 昵称 -->
-      <view class="item">
-        <view class="item-label">昵称</view>
-        <view class="item-value">
-          <input type="text" value="{{nickname}}" bindinput="onNicknameInput" placeholder="请输入昵称" />
-        </view>
+      <view class="nickname-wrapper">
+          <text class="nickname-label">昵称</text>
+          <input type="nickname" class="nickname-input" placeholder="{{nickName}}" bind:change="onInputChange" />
+        
       </view>
       <view class="divider"></view>
       <!-- 个性签名 -->
       <view class="item">
         <view class="item-label">个性签名</view>
         <view class="item-value">
-          <input type="text" value="{{signature}}" bindinput="onSignatureInput" maxlength="30" placeholder="请输入个性签名" />
+          <input 
+          type="text" 
+          value="{{userInfo.signature}}" 
+          bindinput="onSignatureInput" 
+          placeholder="请输入个性签名"
+        />
         </view>
       </view>
       <view class="divider"></view>
@@ -32,14 +38,15 @@
       <view class="item">
         <view class="item-label">性别</view>
         <view class="item-value">
-          <picker class="xuanzeqi" mode="selector" range="{{genders}}" value="{{genderIndex}}" bindchange="onGenderChange">
-          <view class="sex">{{genders[genderIndex]}}</view>
+          <picker class="xuanzeqi" mode="selector" range="{{userInfo.genders}}"  value="{{genderIndex}}" bindchange="onGenderChange">
+            <view class="sex">{{userInfo.genders[userInfo.genderIndex]}}</view>
         </picker>
         </view>
         <image class="jiantou" src="/进入符号.svg"></image>
       </view>
     </view>
   </view>
+
 
       
 
@@ -68,7 +75,7 @@
         <view class="item-label">院系</view>
         <view class="item-value">
           <picker class="xuanzeqi" mode="selector" range="{{departments}}" value="{{departmentIndex}}" bindchange="onDepartmentChange" disabled>
-          <view class="yuanxi">{{departments[departmentIndex]}}</view>
+          <view class="yuanxi">{{departments}}</view>
         </picker>
         </view>
       </view>
@@ -86,7 +93,7 @@
         <view class="item-label">入学年份</view>
         <view class="item-value">
           <picker class="xuanzeqi" mode="selector" range="{{enrollmentYears}}" value="{{enrollmentYearIndex}}" bindchange="onEnrollmentYearChange" disabled>
-          <view class="ruxuenianfen">{{enrollmentYears[enrollmentYearIndex]}}</view>
+          <view class="ruxuenianfen">{{enrollmentYears}}</view>
         </picker>
         </view>
       </view>
@@ -94,11 +101,10 @@
       <!-- 手机号 -->
       <view class="item">
         <view class="item-label">手机号</view>
-        <view class="item-value">
-        </view>
+        <input type="text" value="{{phoneNumber}}" disabled />
       </view>
     </view>
   </view>
   <!-- 保存按钮 -->
-  <button type="primary" class="save-button" bindtap="saveProfile" >保存</button>
+  <button type="primary" class="save-button" bindtap="SaveCommonProfile" >保存</button>
 </view>

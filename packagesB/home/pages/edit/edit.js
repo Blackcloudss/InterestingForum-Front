@@ -1,61 +1,224 @@
+const app = getApp();
+const atoken = app.globalData.atoken;
 Page({
   data: {
     // 第一个板块
-    avatarUrl: '/莞工趣谈/“我的”页面补充/默认头像 1.svg', // 默认头像地址
-    nickname: '', // 昵称
+    userInfo: {
+      avatarUrl: '',
+      nickName: '',
+      sex:'',
+      genders: ['请选择性别', '男', '女'], 
+    genderIndex: 0,
 
-    // 第二个板块
-    signature: '', // 个性签名
-    genders: ['请选择性别','男', '女'],
-    genderIndex: 0, // 性别索引
-
-    // 第三个板块
-    realName: '', // 真实姓名
-    studentId: '2023414320201', // 完整学号
-    studentIdDisplay: '*************', // 显示的学号
-    departments: ['','马克思主义学院','计算机科学与技术学院（软件学院、网络空间安全学院）', '卓越工程师学院','电信工程与智能化学院','生态环境与建筑工程学院','化学功能与能源技术学院','机械工程学院','材料科学与工程学院','国际微电子学院','生命健康技术学院','经济与管理学院','文学与传媒学院','法律与社会工作学院','教育学院','粤台产业科技学院','东莞理工学院法国国立工艺学院联合学院','学生社区知行学院','国际学院','其他'],
-    departmentIndex: 0, // 院系索引
-    major: '', // 专业
-    enrollmentYears: ['','2025年','2024年','2023年', '2022年', '2021年', '2020年','2019年','2018年','2017年','2016年','2015年','2014年','2013年','2012年','2011年','2010年','2009年','2008年','2007年','2006年','2005年','2004年','2003年','2002年','2001年','2000年'],
-    enrollmentYearIndex: 0, // 入学年份索引
-    phoneNumber: '' // 手机号
+      birthday:'',
+      tag:'',
+      signature:'',
+      realName: '', 
+      studentIdDisplay: '', 
+      departments: '',
+      major: '', 
+      enrollmentYears:'',
+      phoneNumber: '' ,
+    },
+    
+    canIUseNicknameComp: wx.canIUse('input.type.nickname'),
+    hasUserInfo: false,
+    canIUseGetUserProfile: wx.canIUse('getUserProfile'),
+    canIUseNicknameComp: wx.canIUse('input.type.nickname'),
   },
-
-  onLoad() {
-    // 模拟从登录信息获取昵称
+  
+  onChooseAvatar(e) {
+    const { avatarUrl } = e.detail
+    const { nickName } = this.data.userInfo
     this.setData({
-      nickname: ''
-    });
+      "userInfo.avatarUrl": avatarUrl,
+      hasUserInfo: nickName && avatarUrl ,
+    })
+  },
+onInputChange(e) {
+  const nickName = e.detail.value
+  const { avatarUrl } = this.data.userInfo
+  this.setData({
+    "userInfo.nickName": nickName,
+    hasUserInfo: nickName && avatarUrl ,
+  })
+},
+getUserProfile(e) {
+  wx.getUserProfile({
+    desc: '展示用户信息', 
+    success: (res) => {
+      console.log(res)
+      this.setData({
+        userInfo: res.userInfo,
+        hasUserInfo: true
+      })
+    }
+  })
+},
+  onLoad() {
+    this.GetCommonProfile()
+    this.GetProfileProfile()
+    
+  },
+//获取基础信息
+  GetCommonProfile(){
+    console.log('获取基础信息的方法执行');
+    app.request({
+      url: `https://backend.interesting-forum.cn/api/profile/common/show`,
+     method: 'GET'
+     }).then(res => {
+       console.log('获取到的我的基础---:', res.data);
+       
+       if (res.code === 20000 && res.data) {
+         const data = res.data;
+         const sex = res.data.sex || '';
+        const newGenders = [sex || '请选择性别', '男', '女'];
+
+         this.setData({
+            nickName:data.nickname|| '匿名用户',
+            sex: sex,
+        'userInfo.genders': newGenders,
+        // 根据sex设置默认选中项
+        'userInfo.genderIndex': sex === '男' ? 1 : sex === '女' ? 2 : 0,
+             tag: data.tag,
+             birthday:data.birthday,
+             
+             'userInfo.signature': data.sign||'暂无个性签名',
+             'userInfo.avatarUrl': data.avatar ? 'https://backend.interesting-forum.cn' + data.avatar : '/图片素材/post-icon/touxiang/默认头像.webp',
+         });
+        
+       } else {
+         throw new Error('返回数据异常');
+       }
+     }).catch(err => {
+       console.error('获取基础信息失败:', err);
+       wx.showToast({
+         title: '获取基础信息失败',
+         icon: 'none'
+       });
+     });
+  },
+ 
+//获取我的隐私信息
+GetProfileProfile(){
+    console.log('获取隐私信息的方法执行');
+    app.request({
+      url: `https://backend.interesting-forum.cn/api/profile/private/show`,
+     method: 'GET'
+     }).then(res => {
+       console.log('获取到的我的隐私---:', res.data);
+       
+       if (res.code === 20000 && res.data) {
+         const data = res.data;
+         this.setData({
+            realName:data.name,  
+            studentIdDisplay:data.studentId|| '匿名用户',
+            departments: data.academy,
+            enrollmentYears:data.grade,
+            major:data.major,
+            phoneNumber:data.phone,
+           });
+        
+       } else {
+         throw new Error('返回数据异常');
+       }
+     }).catch(err => {
+       console.error('获取基础信息失败:', err);
+       wx.showToast({
+         title: '获取基础信息失败',
+         icon: 'none'
+       });
+     });
   },
 
-  // 选择头像
-  chooseAvatar() {
-    wx.chooseMedia({
-      sourceType: ['album', 'camera'],
-      maxDuration: 30,
-      camera: 'back',
-      success: (res) => {
-        this.setData({
-          avatarUrl: res.tempFiles[0].tempFilePath
-        });
-      }
-    });
-    // 上传头像到服务器（可选）
-    this.uploadAvatar(avatarUrl);
-  },
-  uploadAvatar(tempFilePath) {
-    // 实际开发中需替换为你的上传接口
+
+// 保存基本信息到后端
+SaveCommonProfile() {
+  const { userInfo } = this.data;
+  const app = getApp();
+  
+ // 从userInfo中提取必要字段
+ const avatarUrl = userInfo.avatarUrl;
+ const nickName = userInfo.nickName;
+ const gender = userInfo.genderIndex === 1 ? '男' : userInfo.genderIndex === 2 ? '女' : '';
+ const signature = userInfo.signature;
+
+ // 字段校验
+ if (!avatarUrl) {
+   wx.showToast({ title: '请上传头像', icon: 'none' });
+   return;
+ }
+ if (!nickName.trim()) {
+   wx.showToast({ title: '请输入昵称', icon: 'none' });
+   return;
+ }
+ if (!signature.trim()) {
+   wx.showToast({ title: '请输入个性签名', icon: 'none' });
+   return;
+ }
+ if (userInfo.genderIndex === 0) {
+   wx.showToast({ title: '请选择性别', icon: 'none' });
+   return;
+ }
+
+  // 使用Promise包装的微信文件上传
+  const uploadTask = () => new Promise((resolve, reject) => {
     wx.uploadFile({
-      url: 'https://your-api.com/upload',
-      filePath: tempFilePath,
+      url: `https://backend.interesting-forum.cn/api/profile/common/update`, // 确保地址正确
+      filePath: userInfo.avatarUrl,
+      name: 'avatar', // 参数名需要与后端一致
+      formData: {
+        nickname: userInfo.nickName,
+        sex: userInfo.genderIndex === 1 ? '男' : '女',
+        sign: userInfo.signature
+      },
+      header: {
+        'Authorization': app.globalData.atoken // 携带token
+      },
       success: (res) => {
-        const serverUrl = JSON.parse(res.data).url;
-        this.setData({ avatarUrl: serverUrl }); // 替换为服务器存储的头像
+        if (res.statusCode !== 200) {
+          reject(new Error(`请求失败，状态码：${res.statusCode}`))
+          return
+        }
+        try {
+          const data = JSON.parse(res.data)
+          resolve(data)
+        } catch (e) {
+          reject(new Error('响应数据解析失败'))
+        }
+      },
+      fail: (err) => reject(err)
+    })
+  })
+
+  // 执行上传并处理结果
+  wx.showLoading({ title: '保存中...' })
+  uploadTask()
+    .then(response => {
+      if (response.code === 20000) {
+        wx.showToast({ title: '保存成功', icon: 'success' })
+        app.globalData.userInfo = {
+          ...app.globalData.userInfo,
+          avatar: userInfo.avatarUrl,
+          nickname: userInfo.nickName,
+          sign: userInfo.signature
+        }
+        setTimeout(() => {
+          wx.switchTab({ url: '/pages/home/home' })
+        }, 1500)
+      } else {
+        throw new Error(response.message || '保存失败')
       }
-    });
-  },
-
-
+    })
+    .catch(err => {
+      console.error('保存失败:', err)
+      wx.showToast({
+        title: err.message || '保存失败',
+        icon: 'none'
+      })
+    })
+    .finally(() => wx.hideLoading())
+},
   // 昵称输入事件
   onNicknameInput(e) {
     this.setData({
@@ -66,68 +229,18 @@ Page({
   // 个性签名输入事件
   onSignatureInput(e) {
     this.setData({
-      signature: e.detail.value
+      'userInfo.signature': e.detail.value 
     });
-  },
+  }
+  ,
 
   // 性别选择事件
   onGenderChange(e) {
     this.setData({
-      genderIndex: e.detail.value
+      "userInfo.genderIndex": e.detail.value
     });
   },
 
 
-  saveProfile() {
-    const { 
-      avatarUrl, 
-      nickname, 
-      signature, 
-      genderIndex,
-      realName, 
-      phoneNumber 
-    } = this.data;
-
-    // 校验必填项
-    if (avatarUrl === '/莞工趣谈/“我的”页面补充/默认头像 1.svg') {
-      wx.showToast({ title: '请上传头像', icon: 'none' });
-      return;
-    }
-    if (!nickname.trim()) {
-      wx.showToast({ title: '请输入昵称', icon: 'none' });
-      return;
-    }
-    if (!signature.trim()) {
-      wx.showToast({ title: '请输入个性签名', icon: 'none' });
-      return;
-    }
-    if (genderIndex === 0) {
-      wx.showToast({ title: '请选择性别', icon: 'none' });
-      return;
-    }
-
-    // 所有校验通过后执行保存
-    wx.showLoading({ title: '保存中...' });
-    setTimeout(() => {
-      wx.hideLoading();
-      wx.showToast({ title: '资料保存成功！', icon: 'success' });
-      
-      // 实际开发中这里需要：
-      // 1. 提交数据到服务器
-      // 2. 保存成功后返回上一页
-      // wx.navigateBack();
-      wx.navigateTo({
-        url: '/pages/aboutus/aboutus',
-        success: () => {
-          // 跳转成功后执行额外逻辑
-          console.log("跳转页面")
-        },
-        fail: (err) => {
-          console.error('跳转失败', err);
-        }
-      });
-    }, 800);
-      // 在目标页面禁止返回（需要自定义导航栏）
-wx.hideHomeButton(); // 隐藏首页按钮
-  },
+  
 });

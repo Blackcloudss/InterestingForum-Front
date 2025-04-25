@@ -1,3 +1,5 @@
 {
-  "navigationBarTitleText": "校园生活"
+  "navigationBarTitleText": "校园生活",
+  "enablePullDownRefresh": true,
+  "backgroundTextStyle": "dark"
 }

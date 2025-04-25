@@ -1,283 +1,255 @@
+const app = getApp();
+// headers.Authorization = this.globalData.atoken;
 Page({
   data: {
     navScrollLeft: 0,
     navItems: ['表白', '求助打听', '找搭子', '其他'],
-    posts: {
-      '表白': [
-        
-        {
-          id:1,
-          avatar: '/图片素材/莞工趣谈/首页/头像3.png',
-          avatarl:'/图片素材/莞工趣谈/首页/2-4校园杂谈/组件/表白.png',
-          username: 'Pursue',
-          time: '刚刚',
-          content: '求备用机,有没有出苹果手机备用机的友友',
-          likes: 0,
-          comments: 0,
-        },
-        {
-          id:2,
-          avatar: '/图片素材/莞工趣谈/首页/2-2校园生活/头像2.png',
-          avatarl:'/图片素材/莞工趣谈/首页/2-4校园杂谈/组件/表白.png',
-          username: '折星',
-          time: '1分钟前',
-          content: '低价出最新国考,粉笔教资,专四专八等资料',
-          likes: 1,
-          comments: 1,
-        },
-        {
-          id:3,
-          avatar: '/图片素材/莞工趣谈/首页/2-2校园生活/头像3.png',
-          avatarl:'/图片素材/莞工趣谈/首页/2-4校园杂谈/组件/表白.png',
-          username: '邶邶',
-          time: '2分钟前',
-          content: '20r出一个全新的电脑支架',
-          likes: 2,
-          comments: 2,
-        },
-        {
-          id:4,
-          avatar: '/图片素材/莞工趣谈/首页/2-2校园生活/头像4.png',
-           avatarl:'/图片素材/莞工趣谈/首页/2-4校园杂谈/组件/表白.png',
-          username: '豆浆',
-          time: '1天前',
-          content: '出《哪吒2》电影票,地点:佳纷天地',
-          likes: 3,
-          comments: 3,
-        },
-        {
-          id:5,
-          avatar: '/图片素材/莞工趣谈/首页/2-2校园生活/头像5.png',
-           avatarl:'/图片素材/莞工趣谈/首页/2-4校园杂谈/组件/表白.png',
-          username: '邹围有燕子的晴天',
-          time: '2天前',
-          content: '出一张办公椅,50r,可小刀',
-          likes: 4,
-          comments: 4,
-        },
-        {
-          id:6,
-          avatar: '/图片素材/莞工趣谈/首页/头像3.png',
-           avatarl:'/图片素材/莞工趣谈/首页/2-4校园杂谈/组件/表白.png',
-          username: 'Pursue',
-          time: '3天前',
-          content: '求大二下册网络安全专业的教材',
-          likes: 5,
-          comments: 5,
-        }
-
-      ],
-      '求助打听': [
-        {
-          id:7,
-          avatar: '/图片素材/莞工趣谈/首页/头像3.png',
-          avatarl:'/图片素材/莞工趣谈/首页/2-4校园杂谈/组件/打听求助.png',
-          username: 'Pursue',
-          time: '刚刚',
-          content: '丢失一把钥匙🔑,二饭附近',
-          likes: 0,
-          comments: 0,
-        },
-        {
-          id:8,
-          avatar: '/图片素材/莞工趣谈/首页/2-2校园生活/头像2.png',
-          avatarl:'/图片素材/莞工趣谈/首页/2-4校园杂谈/组件/打听求助.png',
-          username: '折星',
-          time: '1分钟前',
-          content: '捡到一本《高等数学》上册的书📖,在图书馆门口',
-          likes: 1,
-          comments: 1,
-        },
-        {
-          id:9,
-          avatar: '/图片素材/莞工趣谈/首页/2-2校园生活/头像3.png',
-          avatarl:'/图片素材/莞工趣谈/首页/2-4校园杂谈/组件/打听求助.png',
-          username: '邶邶',
-          time: '2分钟前',
-          content: '黑色杯子,操场旁边丢失',
-          likes: 2,
-          comments: 2,
-        },
-        {
-          id:10,
-          avatar: '/图片素材/莞工趣谈/首页/2-2校园生活/头像4.png',
-          avatarl:'/图片素材/莞工趣谈/首页/2-4校园杂谈/组件/打听求助.png',
-          username: '豆浆',
-          time: '1天前',
-          content: '在体育馆旁边捡到粉色耳机,遗失者可联系',
-          likes: 3,
-          comments: 3,
-        },
-        {
-          id:11,
-          avatar: '/图片素材/莞工趣谈/首页/2-2校园生活/头像5.png',
-          avatarl:'/图片素材/莞工趣谈/首页/2-4校园杂谈/组件/打听求助.png',
-          username: '邹围有燕子的晴天',
-          time: '2天前',
-          content: '教学楼6a遗失白色书包',
-          likes: 4,
-          comments: 4,
-        },
-        {
-          id:12,
-          avatar: '/图片素材/莞工趣谈/首页/头像3.png',
-          avatarl:'/图片素材/莞工趣谈/首页/2-4校园杂谈/组件/打听求助.png',
-          username: 'Pursue',
-          time: '3天前',
-          content: '谁在一饭二楼椅子上看见一把有粉色爱心的雨伞🥹🥹',
-          likes: 5,
-          comments: 5,
-        }
-      ],
-      '找搭子': [
-        {
-          id:13,
-          avatar: '/图片素材/莞工趣谈/首页/头像3.png',
-          avatarl:'/图片素材/莞工趣谈/首页/2-4校园杂谈/组件/找搭子.png',
-          username: 'Pursue',
-          time: '刚刚',
-          content: '有闲置厚衣服的同学可以捐给流浪动物，一起递温暖',
-          likes: 0,
-          comments: 0,
-        },
-        {
-          id:14,
-          avatar: '/图片素材/莞工趣谈/首页/2-2校园生活/头像2.png',
-           avatarl:'/图片素材/莞工趣谈/首页/2-4校园杂谈/组件/找搭子.png',
-          username: '折星',
-          time: '1分钟前',
-          content: '体育馆围栏里有只流浪狗被困，急需救助，有爱心人士请帮忙，一起拯救它！',
-          likes: 1,
-          comments: 1,
-        },
-        {
-          id:15,
-          avatar: '/图片素材/莞工趣谈/首页/2-2校园生活/头像3.png',
-           avatarl:'/图片素材/莞工趣谈/首页/2-4校园杂谈/组件/找搭子.png',
-          username: '邶邶',
-          time: '2分钟前',
-          content: '某同学家庭变故，生活困难，希望有同学能捐赠生活用品或提供帮助',
-          likes: 2,
-          comments: 2,
-        },
-        {
-          id:16,
-          avatar: '/图片素材/莞工趣谈/首页/2-2校园生活/头像4.png',
-         avatarl:'/图片素材/莞工趣谈/首页/2-4校园杂谈/组件/找搭子.png',
-          username: '豆浆',
-          time: '1天前',
-          content: '莞馨社区楼下小猫急需避寒小窝，今晚暂存柜见，一起用纸箱旧衣服DIY猫屋！',
-          likes: 3,
-          comments: 3,
-        },
-        {
-          id:17,
-          avatar: '/图片素材/莞工趣谈/首页/2-2校园生活/头像5.png',
-         avatarl:'/图片素材/莞工趣谈/首页/2-4校园杂谈/组件/找搭子.png',
-          username: '邹围有燕子的晴天',
-          time: '2天前',
-          content: '回收闲置冬衣&棉衣，清洗后赠与困难同学',
-          likes: 4,
-          comments: 4,
-        },
-        {
-          id:18,
-          avatar: '/图片素材/莞工趣谈/首页/头像3.png',
-         avatarl:'/图片素材/莞工趣谈/首页/2-4校园杂谈/组件/找搭子.png',
-          username: 'Pursue',
-          time: '3天前',
-          content: '那只黄色的胖猫有猫瘟，虽然猫瘟不会对人有影响，但是对其他小猫有影响，请大家摸完后洗手再摸其他小猫咪',
-          likes: 5,
-          comments: 5,
-        }
-      ],
-      '其他': [
-        {
-          id:19,
-          avatar: '/图片素材/莞工趣谈/首页/头像3.png',
-          avatarl:'/图片素材/莞工趣谈/首页/2-4校园杂谈/组件/其他.png',
-          username: 'Pursue',
-          time: '刚刚',
-          content: '四饭的“千里香”馄饨店超好吃，推荐同学们去',
-          likes: 0,
-          comments: 0,
-        },
-        {
-          id:20,
-          avatar: '/图片素材/莞工趣谈/首页/2-2校园生活/头像2.png',
-          avatarl:'/图片素材/莞工趣谈/首页/2-4校园杂谈/组件/其他.png',
-          username: '折星',
-          time: '1分钟前',
-          content: '校园周边剧本杀探店，哪家的DM会带，求推',
-          likes: 1,
-          comments: 1,
-        },
-        {
-          id:21,
-          avatar: '/图片素材/莞工趣谈/首页/2-2校园生活/头像3.png',
-          avatarl:'/图片素材/莞工趣谈/首页/2-4校园杂谈/组件/其他.png',
-          username: '邶邶',
-          time: '2分钟前',
-          content: '解锁校园美食新地标，松山湖万科的烤鱼很香很好吃！',
-          likes: 2,
-          comments: 2,
-        },
-        {
-          id:22,
-          avatar: '/图片素材/莞工趣谈/首页/2-2校园生活/头像4.png',
-          avatarl:'/图片素材/莞工趣谈/首页/2-4校园杂谈/组件/其他.png',
-          username: '豆浆',
-          time: '1天前',
-          content: '谁懂啊，广隆蛋挞王的芋泥厚蛋糕绝了！蛋挞也很香！',
-          likes: 3,
-          comments: 3,
-        },
-        {
-          id:23,
-          avatar: '/图片素材/莞工趣谈/首页/2-2校园生活/头像5.png',
-          avatarl:'/图片素材/莞工趣谈/首页/2-4校园杂谈/组件/其他.png',
-          username: '邹围有燕子的晴天',
-          time: '2天前',
-          content: '周末打羽毛球，找搭子，女生',
-          likes: 4,
-          comments: 4,
-        },
-        {
-          id:24,
-          avatar: '/图片素材/莞工趣谈/首页/头像3.png',
-          avatarl:'/图片素材/莞工趣谈/首页/2-4校园杂谈/组件/其他.png',
-          username: 'Pursue',
-          time: '3天前',
-          content: '求搭子，去探索周边美食',
-          likes: 5,
-          comments: 5,
-        }
-      ]
-      
-    },
-    currentCategory: 0, // 默认选中“二手交易”
-    currentPosts: []
-  
+    currentCategory: 0,
+    title:'',
+    currentPosts: [],
+    loading: true, // 新增加载状态控制
+    refresherTriggered: false, // 添加下拉刷新状态控制
+    // 添加默认帖子数据
+    defaultPosts: [
+      {
+        id: 'default_1',
+        avatar: '/图片素材/post-icon/touxiang/默认头像.webp',
+        avatarl: '/图片素材/post-icon/postsort/campuschat-postsort/表白.png',
+        username: '莞工趣谈官方',
+        time: '刚刚',
+        content: '欢迎来到莞工趣谈！这里是表白专区',
+        likes: 0,
+        comments: 0,
+        collects: 0
+      },
+      {
+        id: 'default_2',
+        avatar: '/图片素材/post-icon/touxiang/默认头像.webp',
+        avatarl: '/图片素材/post-icon/postsort/campuschat-postsort/打听求助.png',
+        username: '系统管理员',
+        time: '刚刚',
+        content: '求助打听',
+        likes: 0,
+        comments: 0,
+        collects: 0
+      }
+    ]
   },
   
   onNavItemTap(e) {
     const index = e.currentTarget.dataset.index;
     this.setData({
-      currentCategory: index
+      currentCategory: index,
+      loading: true // 切换分类时显示加载状态
     });
     this.showPostsByCategory(index);
-    
   },
 
-    showPostsByCategory(categoryIndex) {
-      const categoryKey = this.data.navItems[categoryIndex];
-      this.setData({
-        currentPosts: this.data.posts[categoryKey]
+  // 添加下拉刷新处理方法
+  onScrollRefresh() {
+    console.log('触发scroll-view下拉刷新');
+    
+    // 设置刷新状态
+    this.setData({
+      refresherTriggered: true
+    });
+
+    // 重新加载当前分类的数据
+    this.showPostsByCategory(this.data.currentCategory)
+      .finally(() => {
+        // 结束刷新状态
+        this.setData({
+          refresherTriggered: false
+        });
       });
   },
+
+  showPostsByCategory(categoryIndex) {
+    const that = this;  // 保存 this 引用
+    const categoryKey = this.data.navItems[categoryIndex];
+    const sub_tag = categoryKey;
+
+    // 验证分类标签
+    const validSubTags = [
+      '表白', '求助打听', '找搭子', '其他'
+    ];
+
+    if (!validSubTags.includes(sub_tag)) {
+      console.error('无效的分类标签:', sub_tag);
+      return Promise.reject(new Error('无效的分类标签'));
+    }
+
+    wx.showLoading({ title: '加载中...' });
+
+    // 简化请求逻辑
+    return new Promise((resolve, reject) => {
+      const timeoutTimer = setTimeout(() => {
+        reject(new Error('请求超时，请检查网络'));
+      }, 15000);
+
+      const requestData = {
+        sub_tag: sub_tag,
+        page: 1,
+        page_size: 10
+      };
+
+      console.log('发送请求参数:', requestData);
+
+      // 定义请求参数
+
+
+// 将参数对象转换为查询字符串
+const queryString = Object.keys(requestData)
+ .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(requestData[key]))
+ .join('&');
+      app.request({
+        url: 'http://117.50.46.248:8085/api/blog/show/list/tag'+'?'+queryString ,
+        method: 'GET',
+        data: requestData
+      }).then(res => {
+        clearTimeout(timeoutTimer);
+        console.log('收到响应数据:', res);
+
+        // 检查响应状态
+        if (!res || res.code !== 20000) {
+          throw new Error('接口返回状态异常');
+        }
+
+        // 处理空数据情况
+        if (!res.data?.blogs || !Array.isArray(res.data.blogs) || res.data.blogs.length === 0) {
+          console.log('无帖子数据，使用默认帖子');
+          const defaultPostsForCategory = that.data.defaultPosts.map(post => ({
+            ...post,
+            avatarl: that._mapSubTag(sub_tag),
+            content: post.content.replace('表白', sub_tag),
+          }));
+
+          that.setData({
+            currentPosts: defaultPostsForCategory,
+            loading: false
+          });
+
+          wx.showToast({
+            title: `暂无${sub_tag}相关帖子`,
+            icon: 'none',
+            duration: 2000
+          });
+
+          resolve();
+          return;
+        }
+
+        // 处理正常数据
+        const posts = res.data.blogs.map(blog => ({
+          id: blog.blog_id || Date.now(),
+          avatar: 'http://117.50.46.248:8085'+blog.avatar || '/图片素材/post-icon/touxiang/默认头像.webp',
+          avatarl: that._mapSubTag(blog.sub_tag || sub_tag),
+          username: blog.nickname || '匿名用户',
+          time: that._formatTime(blog.created_at || blog.create_at),
+          content: blog.content || '暂无内容',
+          title: blog.title || '暂无标题',
+          likes: blog.like_count || blog.be_liked || 0,
+          comments: blog.comment_count || 0,
+          collects: blog.collect_count || 0,
+          isLiked: blog.is_liked || false,  
+  isCollected: blog.is_collected || false
+        }));
+
+        that.setData({
+          currentPosts: posts,
+          loading: false
+        });
+
+        resolve();
+      }).catch(err => {
+        clearTimeout(timeoutTimer);
+        console.error('请求出错:', err);
+
+        // 出错时显示默认帖子
+        const defaultPostsForCategory = that.data.defaultPosts.map(post => ({
+          ...post,
+          avatarl: that._mapSubTag(sub_tag),
+          content: post.content.replace('表白', sub_tag),
+        }));
+
+        that.setData({
+          currentPosts: defaultPostsForCategory,
+          loading: false
+        });
+
+        that._handleError(err.message);
+        reject(err);
+      }).finally(() => {
+        wx.hideLoading();
+      });
+    });
+  },
+
+  // 修改错误处理
+  _handleError(message) {
+    console.error('请求异常:', message);
+    
+    let errorText = '加载失败，请稍后重试';
+    const errorMap = {
+      'token': '登录状态异常，请退出重新进入',
+      '超时': '网络不稳定，请检查连接',
+      '空响应': '服务器暂时不可用',
+      '接口返回状态异常': '服务器繁忙，请稍后再试'
+    };
+
+    // 特殊处理空数据情况
+    if (message.includes('blogs')) {
+      errorText = '暂时没有相关内容';
+      this.setData({ currentPosts: [] });
+      return;
+    }
+
+    Object.keys(errorMap).forEach(key => {
+      if (message.includes(key)) errorText = errorMap[key];
+    });
+
+    this.setData({ 
+      currentPosts: [],
+      loading: false 
+    });
+
+    wx.showToast({
+      title: errorText,
+      icon: 'none',
+      duration: 3000
+    });
+  },
+
+  // 加强分类图标映射
+  _mapSubTag: function(subTag) {
+    const subTagMap = {
+      '表白': '/图片素材/post-icon/postsort/campuschat-postsort/表白.png', // 修正路径
+      '求助打听': '/图片素材/post-icon/postsort/campuschat-postsort/打听求助.png',
+      '其他': '/图片素材/post-icon/postsort/campuschat-postsort/找搭子.png',
+      '找搭子': '/图片素材/post-icon/postsort/campuschat-postsort/其他.png' // 确保路径正确
+    };
+    return subTagMap[subTag] || subTagMap['表白'];
+  },
+
+  // 时间格式化方法（需添加到 Page 对象中）
+  _formatTime: function(timeString) {
+    if (!timeString) return '刚刚';
+    const date = new Date(timeString);
+    const now = new Date();
+    const diff = now - date;
+    const minute = Math.floor(diff / 60000);
+    if (minute < 1) return '刚刚';
+    if (minute < 60) return `${minute}分钟前`;
+    const hour = Math.floor(diff / 3600000);
+    if (hour < 24) return `${hour}小时前`;
+    const day = Math.floor(diff / 86400000);
+    return `${day}天前`;
+  },
   onLoad() {
-    // 页面加载时显示默认分类的帖子
-    this.showPostsByCategory(this.data.currentCategory);
+    // 添加默认分类数据请求
+    this.showPostsByCategory(0); // 强制初始加载"表白"
+    // 移除本地静态数据
+    this.setData({ currentPosts: {} });
   },
   
   onCommentTap(e) {
@@ -287,44 +259,42 @@ Page({
       icon: 'none'
     });
   },
-  // 定义 handleLike 方法
-  handleLike(e) {
-    const postId = e.currentTarget.dataset.id;
-    const currentPosts = this.data.currentPosts;
-    const updatedPosts = currentPosts.map(post => {
+   //监听点赞
+   onLike(e) {
+    console.log('父组件收到点赞事件:', e.detail);
+    const { postId, isLiked, likes } = e.detail; // 参数名需与子组件传递的一致
+    
+    const currentPosts = this.data.currentPosts.map(post => {
       if (post.id === postId) {
-        return { ...post, likes: post.likes + 1 };
+        return { ...post, isLiked, likes };
       }
       return post;
     });
-    this.setData({ currentPosts: updatedPosts });
-    const post = updatedPosts.find(p => p.id === postId);
-    this.updateLike(postId, post.likes);
+    this.setData({ currentPosts: posts });
   },
-  updateLike(postId, likes) {
-    // 示例中的网络请求
-    wx.request({
-      url: 'https://your-backend-api/update_likes', // 替换为你的后端 API 地址
-      method: 'POST',
-      data: {
-        postId,
-        likes
-      },
-      success: (res) => {
-        console.log('点赞成功，后台已更新：', res.data);
-        // 可以在这里提示用户
-        wx.showToast({
-          title: '点赞成功',
-          icon: 'success'
-        });
-      },
-      fail: (err) => {
-        console.error('点赞失败：', err);
-        wx.showToast({
-          title: '点赞失败',
-          icon: 'none'
-        });
+  onCollect(e) {
+    console.log('父组件收到收藏事件:', e.detail);
+    const { postId, isCollected, collects } = e.detail; // 参数名需与子组件传递的一致
+    const posts = this.data.posts.map(post => {
+      if (post.id === postId) {
+        return { ...post, isCollected, collects };
       }
+      return post;
+    });
+    this.setData({ posts });
+  },
+  onPostClick(e) {
+    const postId = e.currentTarget.dataset.postid; // 注意这里是小写
+    console.log('点击的postId:', postId, '类型:', typeof postId);
+  
+    if (!postId || typeof postId !== 'number') {
+      console.error('帖子ID无效:', postId);
+      wx.showToast({ title: '帖子ID无效', icon: 'none' });
+      return;
+    }
+  
+    wx.navigateTo({
+      url: `/pages/post-detail/post-detail?postId=${postId}`
     });
   }
 });

@@ -1,7 +1,11 @@
 <view class="container">
   <!-- 学生手册 -->
   <view class="box1" bindtap="showModal">
-  <image src="cloud://zouyanqing-8gcva3coe0f95523.7a6f-zouyanqing-8gcva3coe0f95523-1350716191/pictures/学生手册+渐变背景.png" mode="aspectFill" class="box1-image"></image>
+  <image src="cloud://zouyanqing-8gcva3coe0f95523.7a6f-zouyanqing-8gcva3coe0f95523-1350716191/pictures/学生手册+渐变背景.png" mode="aspectFill" class="box1-image"> </image>
+  <view class="words">
+    <text class="big">学生手册</text>
+    <view class="small">点击查看学生手册内容</view>
+  </view>
 </view>
 
   <!-- 教学管理规定 -->

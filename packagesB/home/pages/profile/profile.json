@@ -1,4 +1,7 @@
 {
-  "usingComponents": {},
-  "navigationBarTitleText": "我的主页"
+  "usingComponents": {
+    "post": "/components/post/post"
+  },
+  "navigationBarTitleText": "我的主页",
+  "navigationBarBackgroundColor": "#ffd5d6"
 }

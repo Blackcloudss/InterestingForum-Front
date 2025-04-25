@@ -1,107 +1,75 @@
 const app = getApp();
-const atoken = app.globalData.atoken;
 Page({
   data: {
-    signature: '',
-    studentId: '',
-    college: '',
+    followCount: 0,
+    followerCount: 1,
+    signature:'',
     posts: [],
     favorites: [],
     currentTab: 'posts',
     name:'',
     awaver:'',
     tag:'',
-    sex:'',
     birthday:'',
-    college:'',
+    user_id:0,
     page: 1,
     pageSize: 10,
+    avatarUrl: '/图片素材/1-5我的主页/个人主页.png' // 默认头像路径
   },
-  //编辑按钮跳转到实名认证页面
-  goToIdentityProfile() {
-    wx.navigateTo({
-      url: '/packagesB/home/pages/identity/identity'
-    });
-  },
-  onLoad() {
-  this.GetProfileProfile()
-  this.GetCommonProfile();
-  this.loadPosts();  
-  },
-//获取我的隐私信息
-//获取我的隐私信息
-GetProfileProfile(){
-      console.log('获取隐私信息的方法执行');
-      app.request({
-        url: `https://backend.interesting-forum.cn/api/profile/private/show`,
-       method: 'GET'
-       }).then(res => {
-         console.log('获取到的我的隐私---:', res.data);
-         
-         if (res.code === 20000 && res.data) {
-           const data = res.data;
-           this.setData({
-                studentId:data.studentId,
-            college: data.academy,
-             });
-          
-         } else {
-           throw new Error('返回数据异常');
-         }
-       }).catch(err => {
-         console.error('获取基础信息失败:', err);
-         wx.showToast({
-           title: '获取基础信息失败',
-           icon: 'none'
-         });
-       });
-    },
-//获取我的基础详情
-GetCommonProfile(){
+  onLoad(options) {
+     const user_id = options.user_id;
+     console.log('他人主页收到的user_id:', user_id);
+     this.setData({user_id:options.user_id});
+     if (!user_id) {
+       console.error('未收到user_id参数');
+       wx.showToast({ title: '参数错误', icon: 'none' });
+       return;
+  
+  }
+  const app = getApp();
   app.request({
-    url: `https://backend.interesting-forum.cn/api/profile/common/show`,
-   method: 'GET'
-   }).then(res => {
-     console.log('获取到的我的基础:', res.data);
-     
-     if (res.code === 20000 && res.data) {
-       const data = res.data;
-       this.setData({
-           name:data.nickname|| '匿名用户',
-           sex: data.sex,
-           tag: data.tag,
-           birthday:data.birthday,
-           signature: data.sign||'暂无个性签名',
-           avatar: 'https://backend.interesting-forum.cn'+data.avatar || '/图片素材/post-icon/touxiang/默认头像.webp',
-       });
-      
-     } else {
-       throw new Error('返回数据异常');
-     }
-   }).catch(err => {
-     console.error('获取败:', err);
-     wx.showToast({
-       title: '获取详情失败',
-       icon: 'none'
-     });
- 
- 
-   });
+   url: `https://backend.interesting-forum.cn/api/profile/common/other?otherid=${user_id}`,
+    method: 'GET'
+  }).then(res => {
+    console.log('获取到的他人主页详情:', res.data);
+    
+    if (res.code === 20000 && res.data) {
+      const data = res.data;
+      const baseURL = "https://backend.interesting-forum.cn";
+      const images = Array.isArray(data.images) ? data.images.map(item => baseURL + item) : [];
+      console.log('拼接图片路径:',images);
+      this.setData({
+          name:data.nickname|| '匿名用户',
+          sex: data.sex,
+          tag: data.tag,
+          birthday:data.birthday,
+          signature: data.sign,
+          avatar: 'https://backend.interesting-forum.cn'+data.avatar || '/图片素材/post-icon/touxiang/默认头像.webp',
+      });
+      this.loadPosts(); 
+    } else {
+      throw new Error('返回数据异常');
+    }
+  }).catch(err => {
+    console.error('获取帖子详情失败:', err);
+    wx.showToast({
+      title: '获取详情失败',
+      icon: 'none'
+    });
+  });
 },
-
   // 加载“我的帖子”
   loadPosts() {
     const requestData = {
+      user_id:this.data.user_id,
       page: 1,
       page_size: 10
     };
 
     console.log('发送请求参数:', requestData)
-    const queryString = Object.keys(requestData)
- .map(key => encodeURIComponent(key) + '=' + encodeURIComponent(requestData[key]))
- .join('&');
+    
     app.request({
-      url: `https://backend.interesting-forum.cn/api/blog/myself?page=${this.data.page}&page_size=${this.data.pageSize}`,
+      url: `https://backend.interesting-forum.cn/api/blog/other?user_id=${this.data.user_id}&page=1&page_size=10`,
       method: 'GET',
       data: requestData
       }).then(res => {
@@ -125,7 +93,7 @@ GetCommonProfile(){
         }));
 
         this.setData({ posts });
-        
+        resolve();
       }).finally(() => {
         wx.hideLoading();
       });
@@ -139,7 +107,7 @@ GetCommonProfile(){
       page_size: this.data.pageSize
     };
     app.request({
-      url: `https://backend.interesting-forum.cn/api/blog/myself/collected?page=${this.data.page}&page_size=${this.data.pageSize}` ,
+      url: `http://117.50.46.248:8085/api/blog/myself/collected?page=${this.data.page}&page_size=${this.data.pageSize}` ,
       method: 'GET',
       data: requestData
       }).then(res => {
@@ -153,7 +121,7 @@ GetCommonProfile(){
 
         const posts = res.data.blogs.map(blog => ({
           id: blog.blog_id || Date.now(),
-          avatar: `https://backend.interesting-forum.cn`+blog.avatar || '/图片素材/post-icon/touxiang/默认头像.webp',
+          avatar:`https://backend.interesting-forum.cn`+ blog.avatar || '/图片素材/post-icon/touxiang/默认头像.webp',
           username: blog.nickname || '匿名用户',
           content: blog.content || '暂无内容',
           title: blog.title || '暂无标题',

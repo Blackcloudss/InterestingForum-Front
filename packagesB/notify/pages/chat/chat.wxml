@@ -1,0 +1,42 @@
+<view class="container">
+  <!-- 聊天消息展示区域 -->
+  <scroll-view class="chat-box" scroll-y="true" scroll-into-view="{{'msg-' + lastMessageId}}">
+    <block wx:for="{{messages}}" wx:key="id">
+      <view class="message-container {{item.isMe ? 'me' : 'friend'}}" id="msg-{{item.id}}">
+        <!-- 头像 -->
+        <image class="avatar" src="{{item.isMe ? myAvatar : friendAvatar}}"></image>
+        <!-- 消息内容 -->
+        <view class="message-content">
+          <view class="message-bubble">
+            <text>{{item.content}}</text>
+            <!-- 如果是图片消息，显示图片 -->
+            <image wx:if="{{item.image}}" class="message-image" src="{{item.image}}" mode="aspectFit"></image>
+          </view>
+          <!-- 时间戳 -->
+          <view class="timestamp">{{item.timestamp}}</view>
+        </view>
+      </view>
+    </block>
+  </scroll-view>
+
+  <!-- 输入框、上传图标和发送图标 -->
+  <view class="input-box">
+    <button class="upload-icon" bindtap="chooseImage" style="width: 100rpx;">
+      <image src="cloud://zouyanqing-8gcva3coe0f95523.7a6f-zouyanqing-8gcva3coe0f95523-1350716191/拍摄.svg" mode="aspectFit" style="width: 100rpx;"></image>
+    </button>
+    <input 
+      type="text" 
+      class="input-field" 
+      placeholder="请输入消息..." 
+      bindinput="onInput" 
+      value="{{inputValue}}"
+    />
+    <!-- 发送图标 -->
+    <image 
+      class="send-icon" 
+      src="cloud://zouyanqing-8gcva3coe0f95523.7a6f-zouyanqing-8gcva3coe0f95523-1350716191/发送.svg" 
+      mode="aspectFit" 
+      bindtap="sendMessage"
+    ></image>
+  </view>
+</view>

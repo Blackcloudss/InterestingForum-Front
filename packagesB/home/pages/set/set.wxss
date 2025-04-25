@@ -1,7 +1,7 @@
 /* pages/set/set.wxss */
 .container{
   height: 100vh;
-  background-color: #cae2ff;
+  background-color: #ffd5d6;
   z-index: -1;
 }
 .box1{

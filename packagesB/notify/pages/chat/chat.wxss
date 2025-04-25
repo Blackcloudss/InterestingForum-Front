@@ -1,0 +1,121 @@
+/* 页面容器 */
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
+
+/* 聊天消息展示区域 */
+.chat-box {
+  flex: 1;
+  margin-top: -170rpx;
+  overflow-y: auto;
+}
+
+/* 消息容器 */
+.message-container {
+  display: flex;
+  margin-bottom: 10px;
+  margin-top: 20rpx;
+}
+
+/* 好友的消息 */
+.message-container.friend {
+  flex-direction: row;
+}
+
+/* 自己的消息 */
+.message-container.me {
+  flex-direction: row-reverse;
+}
+
+/* 头像 */
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 0 10px;
+}
+
+
+/* 消息内容 */
+.message-content {
+  display: flex;
+  flex-direction: column;
+  max-width: 70%;
+}
+
+/* 消息气泡 */
+.message-bubble {
+  padding: 10px;
+  border-radius: 8px;
+  word-wrap: break-word;
+}
+
+/* 好友的消息气泡 */
+.message-container.friend .message-bubble {
+  background-color: #faf6bdd7;
+  border: 1px solid #ddd;
+  align-self: flex-start;
+}
+
+/* 自己的消息气泡 */
+.message-container.me .message-bubble {
+  background-color: #ffee53b6;
+  color: black;
+  align-self: flex-end;
+}
+
+/* 图片消息 */
+.message-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 8px;
+}
+
+/* 时间戳 */
+.timestamp {
+  font-size: 10px;
+  color: #999;
+  text-align: right;
+  margin-top: 5px;
+}
+
+/* 输入框和发送图标 */
+.input-box {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  width: 700rpx;
+  margin-bottom:-200rpx ;
+  background-color: #fff;
+  border-top: 1px solid rgb(187, 187, 187);
+}
+
+.upload-icon {
+  width: 100rpx;
+  height:100rpx;
+  background-color: transparent;
+  border: none;
+}
+
+.upload-icon image {
+  width: 100%;
+  height: 100%;
+  margin-left: -50rpx;
+}
+
+.input-field {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+
+.send-icon {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}

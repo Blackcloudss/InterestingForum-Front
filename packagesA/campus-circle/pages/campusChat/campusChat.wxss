@@ -108,6 +108,10 @@
 .scroll-container{
   margin-top: 70px;/*给固定导航留出空间*/
 }
+.posts-container {
+  margin-top: 70px;
+  padding: -31rpx;
+}
 
 
 

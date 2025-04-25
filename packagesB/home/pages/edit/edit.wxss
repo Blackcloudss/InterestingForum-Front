@@ -54,7 +54,7 @@
   align-items: center;
   position: absolute;
   width: 550rpx;
-  margin-left: 90rpx;
+  margin-left: 139rpx;
 }
 
 /* 头像和背景图片样式 */
@@ -74,8 +74,7 @@ input {
   flex: 1;
   font-size: 16px;
   color: rgb(139, 139, 139);
-  margin-left:300rpx;
-    /*直接设置文本右对齐 */
+ 
     text-align: right; 
     flex: 1; /* 占据剩余空间，确保对齐效果 */
   /* background-color: red; */
@@ -87,7 +86,7 @@ input {
 .save-button {
   border-radius: 10px;
   font-size: 40rpx;
-  margin-bottom: 60rpx;
+  bottom: -50rpx;
 }
 .save-button:active {
   background-color: #0056b3;
@@ -113,4 +112,43 @@ input {
       /*直接设置文本右对齐 */
       text-align: right; 
       flex: 1; /* 占据剩余空间，确保对齐效果 */
+}
+.avatar-button{
+  padding: 0;
+    width: 50px !important;
+    border-radius: 50%;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+.nickname-wrapper {
+  display: flex;
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+  border-top: .5px solid rgba(0, 0, 0, 0.1);
+  border-bottom: .5px solid rgba(0, 0, 0, 0.1);
+  color: black;
+  /* background-color: red; */
+}
+.nickname-label {
+  width: 105px;
+}
+
+.nickname-input {
+  flex: 1;
+}
+.avatar-wrapper {
+  padding: 0;
+  background: transparent !important; /* 清除按钮默认背景 */
+  border: none !important;
+  width: 56px !important;
+  border-radius: 8px;
+  margin-top: 47px;
+  margin-bottom: 40px;
+  margin-left: 232px !important;
+}
+.avatar-wrapper image {
+  width: 100rpx !important;        /* 明确尺寸 */
+  height: 100rpx !important;
+  margin-left: 0 !important;       /* 移除异常边距 */
 }

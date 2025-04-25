@@ -3,11 +3,11 @@
   background-color: #cae2ff;
 }
 .box{
-  height: 1200rpx;
+  height: 1167rpx;
   padding: 30rpx;
   width:590rpx;
   background-color: white;
-  margin-top: -150rpx;
+  margin-top: -173rpx;
   border-radius: 50rpx;
   
 }

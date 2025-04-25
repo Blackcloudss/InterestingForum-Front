@@ -5,6 +5,8 @@
   border-radius: 10px;
   padding: 10px;
   border: 2px solid #efefef;
+  width: 350px;
+  height: 100px;
 }
 /* 组件样式 */
 .action-icon.liked {
@@ -43,9 +45,11 @@
   /* background-color: green; */
 }
 
-.post-content {
-  margin: 10px 0;
-  font-size: 14px;
+.post-title {
+  margin: 2px 0;
+  font-size: 16px;
+  font-size: 700;
+  /* background-color: red; */
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -54,10 +58,14 @@
 .post-actions {
   display: flex;
   justify-content: space-between;
+  position: absolute;
+  bottom: 0px;
 }
 
 .action {
   display: flex;
+  position: absolute;
+  left: 250px;
 }
 
 .action-icon {
@@ -70,4 +78,25 @@
   width: 60px;
   height: 20px;
   margin-right: 0px;
+  
+}
+/* 确保.liked类样式定义正确 */
+.action-icon.liked {
+  filter: brightness(0) saturate(100%) invert(27%) sepia(51%)
+  saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);
+}
+.action-icon.collected {
+  filter: brightness(0) saturate(100%) invert(27%) sepia(51%)
+  saturate(2878%) hue-rotate(346deg) brightness(104%) contrast(97%);
+}
+/* 点赞激活样式（蓝色） */
+.action-icon.liked-blue {
+  filter: brightness(0) saturate(100%) invert(39%) sepia(96%) 
+          saturate(1322%) hue-rotate(194deg) brightness(90%) contrast(96%);
+}
+
+/* 收藏激活样式（蓝色） */
+.action-icon.collected-blue {
+  filter: brightness(0) saturate(100%) invert(39%) sepia(96%) 
+          saturate(1322%) hue-rotate(194deg) brightness(90%) contrast(96%);
 }

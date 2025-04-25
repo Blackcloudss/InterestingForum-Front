@@ -2,7 +2,7 @@
 
 <view class="navbar">
   
-  <view class="nav-item {{currentCategory === index ? 'active' : ''}}" wx:for="{{navItems}}" wx:key="index" bindtap="onNavItemTap" data-index="{{index}}">{{item}}
+  <view class="nav-item {{currentCategory === index ? 'active' : ''}}" wx:for="{{navItems}}" wx:key="index" bindtap="onNavItemTap" data-index="{{index}}">{{item.text}}
   </view>
 
 </view>
@@ -29,21 +29,18 @@ show-scrollbar="{{false}}"
   <view class="posts-container">
     <block wx:for="{{currentPosts}}" wx:key="id">
       <components-post
-            avatar="{{item.avatar}}"
-            avatarl="{{item.avatarl}}"
-            username="{{item.username}}"
-            time="{{item.time}}"
-            content="{{item.content}}"
-            title="{{item.title}}"     
-            data-postId="{{item.id}}"   
-            comments="{{item.comments}}"
-            likes="{{item.likes}}"
-            collects="{{item.collects}}"
-            is-liked="{{item.isLiked}}"
-            is-collected="{{item.isCollected}}"
-            bind:like="onLike"
-            bind:collect="onCollect"
-            catch:tap="onPostClick"   
+        id="{{item.id}}"
+        avatar="{{item.avatar}}"
+        avatarl="{{item.avatarl}}"
+        username="{{item.username}}"
+        time="{{item.time}}"
+        content="{{item.content}}"
+        likes="{{item.likes}}"
+        comments="{{item.comments}}"
+        title="{{item.title}}"
+        bindlike="handleLike"
+        bind:tap="handlePostClick"  
+        data-postId="{{item.id}}"   
       />
     </block>
   </view>
